@@ -1,0 +1,37 @@
+/**
+ * @param {number[]} plants
+ * @param {number} capacity
+ * @return {number}
+ */
+var wateringPlants = function(plants, capacity) {
+
+  var leftoverCapacity = capacity;
+  var steps = [];
+  var stepsToRiver = 0;
+  var stepsTaken = 0;
+  var output=0;
+
+  for (var i = 0; i < plants.length; i++) {
+
+    if (leftoverCapacity >= plants[i]) {
+      leftoverCapacity = leftoverCapacity - plants[i];
+      stepsTaken = 1;
+      steps.push(1);
+      stepsToRiver = i + 1;
+
+    } else if (leftoverCapacity < plants[i]) {
+      stepsTaken = stepsToRiver + (i + 1);
+      leftoverCapacity = capacity - plants[i];
+      steps.push(stepsTaken);
+      stepsToRiver++;
+    }
+
+  }
+
+  for (var i = 0; i < steps.length; i++) {
+    output += steps[i]
+  }
+
+  return output;
+
+};
